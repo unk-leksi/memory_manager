@@ -43,8 +43,8 @@ Frees all resources and clears the internal object registry.
 
 ## 📎 File Structure  
 
-- `34_2_08task.cpp` — Main implementation of the object manager 
-- `34_2_08main.cpp` — Example usage of the object manager with test cases  
+- `34_2_08task.c` — Main implementation of the object manager 
+- `34_2_08main.c` — Example usage of the object manager with test cases  
 - `os_mem.h` — Provides the `Object` and `memory_manager_t` definitions and function declarations  
 
 ## 📦 Example Use  
