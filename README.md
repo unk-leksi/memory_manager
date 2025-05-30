@@ -28,11 +28,6 @@ The solution adheres to the task requirements of a memory management module (as 
 - A `memory_manager_t` structure from `os_mem.h` is used to manage function pointers to the implemented operations.
 - The function `setup_memory_manager` assigns implemented functions to the appropriate fields of the memory manager.
 - STL containers and functions are **not allowed** for this assignment.
-- All functions are implemented in a single source file:  
-  `SS_2_NNtask.cpp`  
-  where `SS` is the student number and `NN` is the task number.
-- A demonstration of the implementation (main program) is located in:  
-  `SS_2_NNmain.cpp`
 
 ## Implemented Functions
 
@@ -45,9 +40,3 @@ The solution adheres to the task requirements of a memory management module (as 
 - `void print_link_counts(void);`
 - `void setup_memory_manager(memory_manager_t* manager);`
 
-## Compilation
-
-Make sure your project includes the `os_mem.h` header and is compiled with a standard C compiler. Example:
-
-```bash
-gcc SS_2_NNtask.c SS_2_NNmain.c -o object_manager
