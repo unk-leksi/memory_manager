@@ -1,42 +1,61 @@
-# Object Manager with Reference Counting
+📁 Memory Manager with Reference Counting in C
 
-## Overview
+📌 Project Description  
+This project implements a simplified memory manager in C that handles dynamically allocated named objects. It provides a reference counting mechanism and supports linking between objects. The manager can print all currently allocated objects in alphabetical order and report how many times each object is referenced by others.
 
-This repository contains the implementation of an **object manager** in C, designed to manage the lifecycle and references of dynamically created objects. The manager tracks all allocated objects, supports linking between them, and provides diagnostics such as object listings and reference counts.
+🔧 Core Features  
+✔️ Object Creation – Create uniquely named objects  
+✔️ Object Destruction – Remove objects from memory  
+✔️ Object Linking – Establish references between objects  
+✔️ Reference Counting – Track how many links point to each object  
+✔️ Alphabetical Listing – Print objects in sorted order  
+✔️ Memory Manager Setup – Register function pointers in `memory_manager_t`
 
-The solution adheres to the task requirements of a memory management module (as part of the "Memory Manager" assignment section). It includes a basic reference counting mechanism to track how many other objects link to each object.
+📜 Function Overview  
 
-## Key Features
+| Function                      | Description                                                                 |
+|------------------------------|-----------------------------------------------------------------------------|
+| `create()`                   | Initializes the internal state of the object manager                        |
+| `destroy()`                  | Frees all memory and resets the object manager                              |
+| `create_object(name)`        | Creates a new object with the given name                                    |
+| `destroy_object(name)`       | Deletes the object with the given name                                     |
+| `link(from, to)`             | Creates a reference from one object to another                              |
+| `print_objects()`            | Prints all currently allocated objects in alphabetical order                |
+| `print_link_counts()`        | Prints reference counts for all non-deleted objects in alphabetical order   |
+| `setup_memory_manager(mgr)`  | Registers all implemented functions in the `memory_manager_t` struct        |
 
-- **Object Creation and Deletion:**
-  - Objects are created using `create_object`.
-  - Objects are deleted using `destroy_object`.
-  - All allocated objects are tracked alphabetically.
+🚀 How It Works  
 
-- **Object Linking and Reference Counting:**
-  - Objects can link to other objects using the `link` function.
-  - Each object keeps track of how many other objects reference it via the `num_refs` field.
-  - Reference counts are displayed with `print_link_counts`.
+1️⃣ **Initialization – `create`**  
+Sets up data structures for object management.
 
-- **Diagnostics:**
-  - `print_objects` lists all currently allocated objects in **alphabetical order**.
-  - `print_link_counts` lists all non-destroyed objects along with their reference counts.
+2️⃣ **Object Management – `create_object`, `destroy_object`**  
+Creates and destroys objects by name. Maintains internal registry.
 
-## Implementation Details
+3️⃣ **Linking – `link`**  
+Links one object to another, increasing the target's reference count.
 
-- The core object structure is defined in the `os_mem.h` file as `Object`.
-- A `memory_manager_t` structure from `os_mem.h` is used to manage function pointers to the implemented operations.
-- The function `setup_memory_manager` assigns implemented functions to the appropriate fields of the memory manager.
-- STL containers and functions are **not allowed** for this assignment.
+4️⃣ **Diagnostics – `print_objects`, `print_link_counts`**  
+Prints all current objects and their reference counts, both in alphabetical order.
 
-## Implemented Functions
+5️⃣ **Cleanup – `destroy`**  
+Frees all resources and clears the internal object registry.
 
-- `void create(void);`
-- `void destroy(void);`
-- `void create_object(const char* name);`
-- `void destroy_object(const char* name);`
-- `void print_objects(void);`
-- `void link(const char* from, const char* to);`
-- `void print_link_counts(void);`
-- `void setup_memory_manager(memory_manager_t* manager);`
+📎 File Structure  
 
+- `34_2_08task.cpp` — Main implementation of the object manager (SS: student number, NN: task number)  
+- `34_2_08main.cpp` — Example usage of the object manager with test cases  
+- `os_mem.h` — Provides the `Object` and `memory_manager_t` definitions and function declarations  
+
+📦 Example Use  
+
+```c
+create();
+create_object("a");
+create_object("b");
+link("a", "b");
+print_objects();       // Output: a b
+print_link_counts();   // Output: a: 0, b: 1
+destroy_object("a");
+print_objects();       // Output: b
+destroy();
